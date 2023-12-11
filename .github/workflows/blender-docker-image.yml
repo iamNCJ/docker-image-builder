@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - blender.Dockerfile
+      - .github/workflows/blender-docker-image.yml
 
 jobs:
   build-and-push:
