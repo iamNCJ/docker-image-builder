@@ -20,6 +20,10 @@ jobs:
       - name: Login to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
+      - name: Convert repository_owner to lowercase
+        id: convert_owner
+        run: echo "::set-output name=owner::$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')"
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
@@ -27,4 +31,4 @@ jobs:
           file: blender.Dockerfile
           platforms: linux/amd64,linux/arm64  # Customize as needed
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/blender:4.0.0
+          tags: ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0.0
