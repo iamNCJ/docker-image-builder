@@ -29,6 +29,6 @@ jobs:
         with:
           context: .
           file: blender.Dockerfile
-          platforms: linux/amd64,linux/arm64  # Customize as needed
+          platforms: linux/amd64  #,linux/arm64  # Customize as needed
           push: true
           tags: ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0.0
