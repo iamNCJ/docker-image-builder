@@ -7,8 +7,9 @@ ENV BLENDER_VERSION=4.0.0
 
 RUN echo "Installing apt packages..." \
 	&& export DEBIAN_FRONTEND=noninteractive \
-	&& apt -y update --no-install-recommends \
-	&& apt -y install --no-install-recommends \
+	&& apt-get -y update --no-install-recommends \
+	&& apt-get upgrade -y \
+	&& apt-get -y install --no-install-recommends \
 	git \
 	wget \
 	ffmpeg \
@@ -46,12 +47,12 @@ RUN echo "Installing apt packages..." \
 	libsuitesparse-dev \
 	python3-setuptools \
 	libreadline-gplv2-dev \
-  libxrender1 \
-  libxi6 \
-  ibxkbcommon-x11-0 \
-  liblzma-dev \
-	&& apt autoremove -y \
-	&& apt clean -y
+	libxrender1 \
+	libxi6 \
+	ibxkbcommon-x11-0 \
+	liblzma-dev \
+	&& apt-get autoremove -y \
+	&& apt-get clean -y
 
 RUN echo "Installing Python ver. ${PYTHON_VERSION}..." \
 	&& cd /opt \
