@@ -49,7 +49,7 @@ RUN echo "Installing apt packages..." \
 	libreadline-gplv2-dev \
 	libxrender1 \
 	libxi6 \
-	ibxkbcommon-x11-0 \
+	libxkbcommon-x11-0 \
 	liblzma-dev \
 	&& apt-get autoremove -y \
 	&& apt-get clean -y
