@@ -27,7 +27,7 @@ ENV LIBRARY_PATH=${CUDA_HOME}/lib64/stubs:${LIBRARY_PATH}
 
 # apt install by root user
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get upgrade && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
     build-essential \
     curl \
     git \
