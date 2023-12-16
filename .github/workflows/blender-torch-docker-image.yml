@@ -1,0 +1,36 @@
+name: Blender PyTorch Docker Build and Push
+
+on:
+  push:
+    paths:
+      - blender-torch.Dockerfile
+      - .github/workflows/blender-torch-docker-image.yml
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Convert repository_owner to lowercase
+        id: convert_owner
+        run: echo "::set-output name=owner::$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')"
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: blender-torch.Dockerfile
+          platforms: linux/amd64  #,linux/arm64  # Customize as needed
+          push: true
+          tags: ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch
+          cache-from: type=registry,ref=ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch
+          cache-to: type=inline
