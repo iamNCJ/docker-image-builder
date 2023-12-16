@@ -42,9 +42,9 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-reco
     python3.10-dev \
     python3-pip \
     wget \
-	libxrender1 \
-	libxi6 \
-	libxkbcommon-x11-0 \
+    libxrender1 \
+    libxi6 \
+    libxkbcommon-x11-0 \
     sudo \
     htop \
     nvtop \
@@ -55,7 +55,11 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-reco
 
 # Change user to non-root user
 RUN groupadd -g ${GID} ${GROUP_NAME} \
-    && useradd -ms /usr/bin/bash -u ${UID} -g ${GID} ${USER_NAME}
+    && useradd -ms /usr/bin/bash -u ${UID} -g ${GID} ${USER_NAME} \
+    && echo 'password' | passwd --stdin root \
+    && echo 'password' | passwd --stdin ${USER_NAME} \
+    && usermod -aG sudo ${USER_NAME} \
+    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER ${USER_NAME}
 
 RUN pip install --upgrade pip setuptools ninja
