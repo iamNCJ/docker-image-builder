@@ -46,7 +46,7 @@ RUN echo "Installing apt packages..." \
 	libgoogle-glog-dev \
 	libsuitesparse-dev \
 	python3-setuptools \
-	libreadline-gplv2-dev \
+	libreadline-dev \
 	libxrender1 \
 	libxi6 \
 	libxkbcommon-x11-0 \
