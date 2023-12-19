@@ -29,7 +29,7 @@ jobs:
         with:
           context: .
           file: blender-torch.Dockerfile
-          platforms: linux/amd64  #,linux/arm64  # Customize as needed
+          platforms: linux/amd64
           push: true
           tags: ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch
           cache-from: type=registry,ref=ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch
