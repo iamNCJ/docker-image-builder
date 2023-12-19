@@ -56,8 +56,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-reco
 # Change user to non-root user
 RUN groupadd -g ${GID} ${GROUP_NAME} \
     && useradd -ms /usr/bin/bash -u ${UID} -g ${GID} ${USER_NAME} \
-    && echo 'password' | passwd --stdin root \
-    && echo 'password' | passwd --stdin ${USER_NAME} \
+    && echo root:password | chpasswd \
+    && echo ${USER_NAME}:password | chpasswd \
     && usermod -aG sudo ${USER_NAME} \
     && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER ${USER_NAME}
