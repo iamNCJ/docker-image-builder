@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.1.1-cudnn8-ubuntu22.04
+FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04
 
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
