@@ -1,4 +1,4 @@
-FROM nvidia/cudagl:11.3.1-devel-ubuntu20.04
+FROM nvidia/cuda:12.1.1-cudnn8-ubuntu22.04
 
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
@@ -63,13 +63,10 @@ RUN echo "Installing Python ver. ${PYTHON_VERSION}..." \
 	&& make \
 	&& checkinstall
 
-ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5 8.0 8.6 8.9 9.0+PTX"
 RUN echo "Installing pip packages..." \
-	&& python3 -m pip install -U pip \
-    && pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113 \
-	&& pip3 --no-cache-dir install bpy==${BLENDER_VERSION} imageio numpy opencv-contrib-python tqdm simple-parsing blenderproc transformers \
-    && pip install ninja \
-    && pip install -v -U git+https://github.com/facebookresearch/xformers.git@main#egg=xformers \
+    && python3 -m pip install -U pip \
+    && pip3 install torch torchvision xformers --index-url https://download.pytorch.org/whl/cu121 \
+    && pip3 --no-cache-dir install bpy==${BLENDER_VERSION} imageio numpy opencv-contrib-python tqdm simple-parsing blenderproc transformers \
     && imageio_download_bin freeimage \
     && blenderproc quickstart
 
