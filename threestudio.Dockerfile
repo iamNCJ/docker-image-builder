@@ -69,6 +69,6 @@ RUN pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --index-url https:/
 RUN pip install git+https://github.com/KAIR-BAIR/nerfacc.git@v0.5.2
 RUN pip install git+https://github.com/NVlabs/tiny-cuda-nn.git#subdirectory=bindings/torch
 
-COPY requirements.txt /tmp
-RUN cd /tmp && pip install -r requirements.txt
+COPY requirements-threestudio.txt /tmp
+RUN cd /tmp && pip install -r requirements-threestudio.txt
 WORKDIR /home/${USER_NAME}/threestudio
