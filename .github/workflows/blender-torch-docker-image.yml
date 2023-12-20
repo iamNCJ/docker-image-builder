@@ -31,6 +31,6 @@ jobs:
           file: blender-torch.Dockerfile
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch
-          cache-from: type=registry,ref=ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch
-          cache-to: type=inline
+          tags: ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch-latest
+          cache-from: type=registry,ref=ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch-buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch-buildcache,mode=max
