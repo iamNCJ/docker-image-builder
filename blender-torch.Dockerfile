@@ -52,10 +52,10 @@ RUN echo "Installing apt packages..." \
     libxkbcommon-x11-0 \
     liblzma-dev \
     pkg-config \
-    libglvnd-dev libglvnd-dev:i386 \
-    libgl1-mesa-dev libgl1-mesa-dev:i386 \
-    libegl1-mesa-dev libegl1-mesa-dev:i386 \
-    libgles2-mesa-dev libgles2-mesa-dev:i386 \
+    libglvnd-dev \
+    libgl1-mesa-dev \
+    libegl1-mesa-dev \
+    libgles2-mesa-dev \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
