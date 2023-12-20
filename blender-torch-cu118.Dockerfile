@@ -51,17 +51,10 @@ RUN echo "Installing apt packages..." \
 	libxi6 \
 	libxkbcommon-x11-0 \
 	liblzma-dev \
+	python3 \
+	python3-pip \
 	&& apt-get autoremove -y \
 	&& apt-get clean -y
-
-RUN echo "Installing Python ver. ${PYTHON_VERSION}..." \
-	&& cd /opt \
-	&& wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz \
-	&& tar xzf Python-${PYTHON_VERSION}.tgz \
-	&& cd ./Python-${PYTHON_VERSION} \
-	&& ./configure --enable-optimizations \
-	&& make \
-	&& checkinstall
 
 RUN echo "Installing pip packages..." \
     && python3 -m pip install -U pip \
