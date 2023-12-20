@@ -32,5 +32,5 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch-cu118
-          cache-from: type=registry,ref=ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch-cu118
-          cache-to: type=inline
+          cache-from: type=registry,ref=ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch-cu118-buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch-cu118-buildcache,mode=max
