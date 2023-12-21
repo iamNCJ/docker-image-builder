@@ -39,7 +39,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: blender-torch.Dockerfile
+          file: blender-torch-cu117.Dockerfile
           platforms: linux/amd64
           push: true
           tags: ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:4.0-torch-cu117
