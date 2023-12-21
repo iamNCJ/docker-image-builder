@@ -33,7 +33,7 @@ jobs:
 
       - name: Convert repository_owner to lowercase
         id: convert_owner
-        run: echo "::set-output name=owner::$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')"
+        run: echo "owner=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
