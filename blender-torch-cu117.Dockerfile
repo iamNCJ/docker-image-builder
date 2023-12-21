@@ -71,7 +71,7 @@ RUN echo "Installing Python ver. ${PYTHON_VERSION}..." \
 
 RUN echo "Installing pip packages..." \
     && python3 -m pip install -U pip setuptools \
-    && pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu117 \
+    && pip3 install torch==2.0.1 torchvision==0.15.2 --index-url https://download.pytorch.org/whl/cu117 \
     && pip3 --no-cache-dir install bpy==${BLENDER_VERSION} imageio numpy opencv-contrib-python tqdm simple-parsing blenderproc transformers \
     && imageio_download_bin freeimage \
     && blenderproc quickstart
