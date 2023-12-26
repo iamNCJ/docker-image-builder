@@ -2,7 +2,7 @@
 # https://github.com/cvpaperchallenge/Ascender
 # https://github.com/nerfstudio-project/nerfstudio
 
-FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
+FROM nvidia/cuda:11.7.1-devel-ubuntu22.04
 
 ARG USER_NAME=ncj
 ARG GROUP_NAME=ncj
@@ -63,7 +63,7 @@ RUN groupadd -g ${GID} ${GROUP_NAME} \
 USER ${USER_NAME}
 
 RUN pip install --upgrade pip setuptools ninja
-RUN pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --index-url https://download.pytorch.org/whl/cu118
+RUN pip install torch torchvision --index-url https://download.pytorch.org/whl/cu117
 # Install nerfacc and tiny-cuda-nn before installing requirements.txt
 # because these two installations are time consuming and error prone
 RUN pip install git+https://github.com/KAIR-BAIR/nerfacc.git@v0.5.2
