@@ -11,8 +11,8 @@ ARG GID=1000
 
 # Set compute capability for nerfacc and tiny-cuda-nn
 # See https://developer.nvidia.com/cuda-gpus and limit number to speed-up build
-ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5 8.0 8.6 8.9 9.0+PTX"
-ENV TCNN_CUDA_ARCHITECTURES=90;89;86;80;75;70;61;60
+ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5 8.0 8.6+PTX"
+ENV TCNN_CUDA_ARCHITECTURES=86;80;75;70;61;60
 # Speed-up build for RTX 30xx
 # ENV TORCH_CUDA_ARCH_LIST="8.6"
 # ENV TCNN_CUDA_ARCHITECTURES=86
