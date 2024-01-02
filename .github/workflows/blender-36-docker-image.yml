@@ -1,4 +1,4 @@
-name: Blender Docker Build and Push
+name: Blender 3.6 Docker Build and Push
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: blender.Dockerfile
+          file: blender-36.Dockerfile
           platforms: linux/amd64  #,linux/arm64  # Customize as needed
           push: true
           tags: ghcr.io/${{ steps.convert_owner.outputs.owner }}/blender:3.6
