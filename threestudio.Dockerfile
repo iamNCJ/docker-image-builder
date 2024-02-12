@@ -70,5 +70,5 @@ RUN pip install git+https://github.com/KAIR-BAIR/nerfacc.git@v0.5.2
 RUN pip install git+https://github.com/NVlabs/tiny-cuda-nn.git#subdirectory=bindings/torch
 
 COPY requirements-threestudio.txt /tmp
-RUN cd /tmp && pip install -r requirements-threestudio.txt
+RUN cd /tmp && sudo chown 1000:1000 requirements-threestudio.txt && pip install -r requirements-threestudio.txt
 WORKDIR /home/${USER_NAME}/threestudio
