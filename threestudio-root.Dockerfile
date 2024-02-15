@@ -55,6 +55,8 @@ RUN pip install torch torchvision --index-url https://download.pytorch.org/whl/c
 RUN pip install git+https://github.com/KAIR-BAIR/nerfacc.git@v0.5.2
 RUN pip install git+https://github.com/NVlabs/tiny-cuda-nn.git#subdirectory=bindings/torch
 RUN pip install git+https://github.com/eliphatfs/cumesh2sdf.git
+COPY diso-0.0.6-cp310-cp310-linux_x86_64.whl /tmp
+RUN pip install /tmp/diso-0.0.6-cp310-cp310-linux_x86_64.whl
 
 COPY requirements-threestudio.txt /tmp
 RUN cd /tmp && pip install -r requirements-threestudio.txt
