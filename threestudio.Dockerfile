@@ -2,7 +2,7 @@
 # https://github.com/cvpaperchallenge/Ascender
 # https://github.com/nerfstudio-project/nerfstudio
 
-FROM nvidia/cuda:11.7.1-devel-ubuntu22.04
+FROM nvidia/cuda:12.1.1-devel-ubuntu22.04
 
 ARG USER_NAME=ncj
 ARG GROUP_NAME=ncj
@@ -11,8 +11,8 @@ ARG GID=1000
 
 # Set compute capability for nerfacc and tiny-cuda-nn
 # See https://developer.nvidia.com/cuda-gpus and limit number to speed-up build
-ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5 8.0 8.6+PTX"
-ENV TCNN_CUDA_ARCHITECTURES=86;80;75;70;61;60
+ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5 8.0 8.6 9.0+PTX"
+ENV TCNN_CUDA_ARCHITECTURES=90;86;80;75;70;61;60
 # Speed-up build for RTX 30xx
 # ENV TORCH_CUDA_ARCH_LIST="8.6"
 # ENV TCNN_CUDA_ARCHITECTURES=86
@@ -63,7 +63,7 @@ RUN groupadd -g ${GID} ${GROUP_NAME} \
 USER ${USER_NAME}
 
 RUN pip install --upgrade pip setuptools ninja
-RUN pip install torch torchvision --index-url https://download.pytorch.org/whl/cu117
+RUN pip install torch torchvision xformers --index-url https://download.pytorch.org/whl/cu121
 # Install nerfacc and tiny-cuda-nn before installing requirements.txt
 # because these two installations are time consuming and error prone
 RUN pip install git+https://github.com/KAIR-BAIR/nerfacc.git@v0.5.2

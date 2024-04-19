@@ -42,6 +42,6 @@ jobs:
           file: threestudio.Dockerfile
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/${{ steps.convert_owner.outputs.owner }}/threestudio:231226
-          cache-from: type=registry,ref=ghcr.io/${{ steps.convert_owner.outputs.owner }}/threestudio:231226-cache
+          tags: ghcr.io/${{ steps.convert_owner.outputs.owner }}/threestudio:240419
+          cache-from: type=registry,ref=ghcr.io/${{ steps.convert_owner.outputs.owner }}/threestudio:240419-cache
           cache-to: type=inline
