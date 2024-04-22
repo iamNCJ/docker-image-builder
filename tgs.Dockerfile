@@ -35,16 +35,16 @@ RUN pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1
 
 RUN python -c "import torch; print(torch.version.cuda)"
 COPY requirements-tgs.txt /tmp
-RUN cd /tmp && pip install -r requirements.txt
+RUN cd /tmp && pip install -r requirements-tgs.txt
 
 # install pointnet2_ops from snowflake
-RUN git clone https://github.com/AllenXiangX/SnowflakeNet.git && cd SnowflakeNet && python setup.py install
+RUN git clone https://github.com/AllenXiangX/SnowflakeNet.git && cd SnowflakeNet/models/pointnet2_ops_lib && python setup.py install
 
 # install pytorch3d
-RUN git clone -b v0.7.3 https://github.com/facebookresearch/pytorch3d.git && cd pytorch3d-0.7.3 && python setup.py install
+RUN git clone -b v0.7.3 https://github.com/facebookresearch/pytorch3d.git && cd pytorch3d && python setup.py install
 
 # install torch-scatter
-RUN git clone https://github.com/rusty1s/pytorch_scatter.git && cd pytorch_scatter && python setup.py install
+RUN git clone https://github.com/rusty1s/pytorch_scatter.git && cd pytorch_scatter && git checkout 140d3ad && python setup.py install
 
 # install diff-gaussian-rasterization
 RUN git clone --recursive https://github.com/graphdeco-inria/diff-gaussian-rasterization.git && cd diff-gaussian-rasterization && python setup.py install
