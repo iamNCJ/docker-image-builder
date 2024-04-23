@@ -9,7 +9,7 @@ ENV TCNN_CUDA_ARCHITECTURES=86;80;75;70;61;60
 ENV FORCE_CUDA=1
 
 ENV CUDA_HOME=/usr/local/cuda
-ENV PATH=${CUDA_HOME}/bin:/home/${USER_NAME}/.local/bin:${PATH}
+ENV PATH=${CUDA_HOME}/bin:/home/root/.local/bin:${PATH}
 ENV LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
 ENV LIBRARY_PATH=${CUDA_HOME}/lib64/stubs:${LIBRARY_PATH}
 
@@ -37,14 +37,15 @@ RUN python -c "import torch; print(torch.version.cuda)"
 COPY requirements-tgs.txt /tmp
 RUN cd /tmp && pip install -r requirements-tgs.txt
 
+WORKDIR /home/root
 # install pointnet2_ops from snowflake
-RUN git clone https://github.com/AllenXiangX/SnowflakeNet.git && cd SnowflakeNet/models/pointnet2_ops_lib && python setup.py install
+RUN git clone https://github.com/AllenXiangX/SnowflakeNet.git && cd SnowflakeNet/models/pointnet2_ops_lib && pip install .
 
 # install pytorch3d
-RUN git clone -b v0.7.3 https://github.com/facebookresearch/pytorch3d.git && cd pytorch3d && python setup.py install
+RUN git clone -b v0.7.3 https://github.com/facebookresearch/pytorch3d.git && cd pytorch3d && pip install .
 
 # install torch-scatter
-RUN git clone https://github.com/rusty1s/pytorch_scatter.git && cd pytorch_scatter && git checkout 140d3ad && python setup.py install
+RUN git clone https://github.com/rusty1s/pytorch_scatter.git && cd pytorch_scatter && git checkout 140d3ad && pip install .
 
 # install diff-gaussian-rasterization
-RUN git clone --recursive https://github.com/graphdeco-inria/diff-gaussian-rasterization.git && cd diff-gaussian-rasterization && python setup.py install
+RUN git clone --recursive https://github.com/graphdeco-inria/diff-gaussian-rasterization.git && cd diff-gaussian-rasterization && pip install .
