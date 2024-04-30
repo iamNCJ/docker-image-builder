@@ -68,6 +68,7 @@ RUN pip install torch torchvision xformers --index-url https://download.pytorch.
 # because these two installations are time consuming and error prone
 RUN pip install git+https://github.com/KAIR-BAIR/nerfacc.git@v0.5.2
 RUN pip install git+https://github.com/NVlabs/tiny-cuda-nn.git#subdirectory=bindings/torch
+RUN cd /tmp && git clone --recursive https://github.com/ashawkey/diff-gaussian-rasterization && cd diff-gaussian-rasterization && pip install .
 
 COPY requirements-threestudio.txt /tmp
 RUN cd /tmp && sudo chown 1000:1000 requirements-threestudio.txt && pip install -r requirements-threestudio.txt

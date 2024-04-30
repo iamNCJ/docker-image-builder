@@ -4,7 +4,7 @@ jaxtyping
 typeguard
 #git+https://github.com/KAIR-BAIR/nerfacc.git@v0.5.2
 #git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
-diffusers<0.20
+diffusers
 transformers==4.28.1
 accelerate
 opencv-python
@@ -46,4 +46,8 @@ kiui
 open-clip-torch
 pymeshlab
 pygltflib
+tyro
+roma
+plyfile
+scikit-learn
 
