@@ -1,9 +1,10 @@
 FROM nvidia/cuda:12.9.1-devel-ubuntu24.04
 
-ENV LC_ALL C.UTF-8
-ENV LANG C.UTF-8
+ENV LC_ALL="C.UTF-8"
+ENV LANG="C.UTF-8"
 ENV PYTHON_VERSION=3.11.13
 ENV BLENDER_VERSION=4.5.3
+ENV PATH="/usr/local/bin:$PATH"
 
 RUN echo "Installing apt packages..." \
 	&& export DEBIAN_FRONTEND=noninteractive \
@@ -58,14 +59,19 @@ RUN echo "Installing Python ver. ${PYTHON_VERSION}..." \
 	&& wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz \
 	&& tar xzf Python-${PYTHON_VERSION}.tgz \
 	&& cd ./Python-${PYTHON_VERSION} \
-	&& ./configure --enable-optimizations \
+	&& ./configure --enable-optimizations --prefix=/usr/local \
 	&& make \
-	&& checkinstall
+	&& make install \
+	&& cd /opt \
+	&& rm -rf Python-${PYTHON_VERSION} Python-${PYTHON_VERSION}.tgz
 
 RUN echo "Installing pip packages..." \
-	&& python3 -m pip install -U pip \
-	&& pip3 --no-cache-dir install bpy==${BLENDER_VERSION} imageio numpy opencv-contrib-python tqdm simple-parsing bpy-helper \
-  && imageio_download_bin freeimage
+	&& /usr/local/bin/python3 -m pip install --upgrade pip \
+	&& /usr/local/bin/python3 -m pip install --no-cache-dir bpy==${BLENDER_VERSION} imageio numpy opencv-contrib-python tqdm simple-parsing bpy-helper \
+	&& /usr/local/bin/python3 -c "import imageio; imageio.plugins.freeimage.download()"
 
-# For AML
-RUN ln -s /usr/local/bin/python3 /usr/bin/python
+# Update python symlinks for consistency
+RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3 1 \
+	&& update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3 1 \
+	&& update-alternatives --install /usr/bin/pip pip /usr/local/bin/pip3 1 \
+	&& update-alternatives --install /usr/bin/pip3 pip3 /usr/local/bin/pip3 1
