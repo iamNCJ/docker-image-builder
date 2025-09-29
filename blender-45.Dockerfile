@@ -64,7 +64,7 @@ RUN echo "Installing Python ver. ${PYTHON_VERSION}..." \
 
 RUN echo "Installing pip packages..." \
 	&& python3 -m pip install -U pip \
-	&& pip3 --no-cache-dir install bpy==${BLENDER_VERSION} imageio numpy opencv-contrib-python tqdm simple-parsing \
+	&& pip3 --no-cache-dir install bpy==${BLENDER_VERSION} imageio numpy opencv-contrib-python tqdm simple-parsing bpy-helper \
   && imageio_download_bin freeimage
 
 # For AML
